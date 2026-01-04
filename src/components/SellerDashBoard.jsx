@@ -37,6 +37,8 @@ export default function SellerDashBoard({ user }) {
     formData.append("category", form.category);
     formData.append("description", form.description);
     formData.append("image", form.image);
+    formData.append("sellerId", user?.uid || "unknown");
+    formData.append("sellerName", user?.name || "Unknown Seller");
 
     try {
       const res = await fetch("http://localhost:5000/api/items/create", {
@@ -147,7 +149,7 @@ export default function SellerDashBoard({ user }) {
                 <span className="text-sm font-medium text-gray-300">
                   {form.image ? form.image.name : "Click to upload or drag and drop"}
                 </span>
-                <span className="text-xs text-gray-500 mt-1">SVG, PNG, JPG or GIF (max. 5MB)</span>
+                <span className="text-xs text-gray-500 mt-1">SVG, PNG, JPG or GIF (max. 50MB)</span>
               </label>
             </div>
           </div>
