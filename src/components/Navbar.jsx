@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { LogOut, User, RefreshCcw } from "lucide-react";
 import Button from "./ui/Button";
+import logo from "../assets/logo.png";
+
 
 export default function Navbar({ user, onLogout, onSwitchRole }) {
     return (
@@ -8,9 +10,11 @@ export default function Navbar({ user, onLogout, onSwitchRole }) {
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <Link to="/" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-                            MK
-                        </div>
+                        <img
+                            src={logo}
+                            alt="McKart Logo"
+                                className="w-10 h-10 rounded-xl object-contain"
+                                    />
                         <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
                             McKart
                         </span>
