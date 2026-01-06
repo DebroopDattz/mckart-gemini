@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import config from "../config";
 import { MessageCircle, ShoppingBag } from 'lucide-react';
 import Card from './ui/Card';
 import Button from './ui/Button';
@@ -8,7 +9,7 @@ const BuyerDashboard = ({ user, openChat }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/items")
+    fetch(`${config.API_BASE_URL}/api/items`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
@@ -47,7 +48,7 @@ const BuyerDashboard = ({ user, openChat }) => {
           <Card key={item.id} className="flex flex-col h-full bg-white/5 border-white/10 hover:bg-white/10 p-4">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-black/50">
               <img
-                src={`http://localhost:5000${item.imageUrl}`}
+                src={`${config.API_BASE_URL}${item.imageUrl}`}
                 alt={item.name}
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />

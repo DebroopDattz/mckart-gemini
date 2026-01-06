@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import config from '../config';
 import { MessageSquare, X } from 'lucide-react';
 import Card from './ui/Card';
 import ChatModal from './ChatModal';
@@ -11,8 +12,8 @@ const ChatWidget = ({ user, isOpen, setIsOpen, activeChat, setActiveChat }) => {
         if (isOpen) {
             const fetchChats = async () => {
                 const url = user.role === 'seller'
-                    ? "http://localhost:5000/api/chat/seller-chats"
-                    : `http://localhost:5000/api/chat/buyer-chats/${user.name}`;
+                    ? `${config.API_BASE_URL}/api/chat/seller-chats`
+                    : `${config.API_BASE_URL}/api/chat/buyer-chats/${user.name}`;
 
                 try {
                     const res = await fetch(url);

@@ -21,11 +21,7 @@ router.post("/chat", async (req, res) => {
 
     try {
         const genAI = getGenAI();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-        // If you want to maintain history, you can construct the chat session accordingly.
-        // For simplicity, we'll start a new chat or approximate history if passed.
-        // The Gemini SDK supports history as an array of { role: "user" | "model", parts: [{ text: "..." }] }
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
         let chatHistory = [];
         if (history && Array.isArray(history)) {

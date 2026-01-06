@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import config from "../config";
 import { Bot, X, Send, Sparkles } from "lucide-react";
 
 export default function AIChatWidget() {
@@ -34,13 +35,13 @@ export default function AIChatWidget() {
 
         try {
             // Prepare history for the backend
-            // Filter out initial welcome message if it doesn't match API expected format or include it as model message
-            const history = messages.map(msg => ({
+            // Filter out initial welcome message (index 0) so history starts with user or is empty
+            const history = messages.slice(1).map(msg => ({
                 sender: msg.sender,
                 text: msg.text
             }));
 
-            const response = await fetch("http://localhost:5000/api/gemini/chat", {
+            const response = await fetch(`${config.API_BASE_URL}/api/gemini/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -64,7 +65,7 @@ export default function AIChatWidget() {
             console.error("Chat Error:", error);
             setMessages(prev => [...prev, {
                 id: Date.now() + 1,
-                text: "Sorry, I'm having trouble connecting to Gemini server right now. Please check if the backend is running and the API key is set.",
+                text: `Error: ${error.message}. Please check keys/backend.`,
                 sender: "ai",
                 isError: true
             }]);
@@ -102,10 +103,10 @@ export default function AIChatWidget() {
                             >
                                 <div
                                     className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.sender === 'user'
-                                            ? 'bg-blue-600 text-white rounded-br-none'
-                                            : msg.isError
-                                                ? 'bg-red-900/50 text-red-200 border border-red-800 rounded-bl-none'
-                                                : 'bg-slate-700 text-slate-100 rounded-bl-none'
+                                        ? 'bg-blue-600 text-white rounded-br-none'
+                                        : msg.isError
+                                            ? 'bg-red-900/50 text-red-200 border border-red-800 rounded-bl-none'
+                                            : 'bg-slate-700 text-slate-100 rounded-bl-none'
                                         }`}
                                 >
                                     {msg.text}

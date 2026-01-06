@@ -1,4 +1,5 @@
 import { useState } from "react";
+import config from "../config";
 import Card from "./ui/Card";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
@@ -19,7 +20,7 @@ export default function AuthPage({ onLogin }) {
         const endpoint = isLogin ? "/api/auth/login" : "/api/auth/signup";
 
         try {
-            const res = await fetch(`http://localhost:5000${endpoint}`, {
+            const res = await fetch(`${config.API_BASE_URL}${endpoint}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),

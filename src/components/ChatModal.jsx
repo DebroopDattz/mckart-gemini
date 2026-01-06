@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import config from '../config';
 import { X, Send, Mic, MicOff } from 'lucide-react';
 import Card from './ui/Card';
 import Button from './ui/Button';
@@ -56,7 +57,7 @@ const ChatModal = ({ isOpen, onClose, activeItem, currentUser, isBuyer }) => {
             const fetchMessages = async () => {
                 try {
                     const itemId = isBuyer ? activeItem.id : activeItem.itemId;
-                    const res = await fetch(`http://localhost:5000/api/chat/${itemId}`);
+                    const res = await fetch(`${config.API_BASE_URL}/api/chat/${itemId}`);
                     const data = await res.json();
                     setMessages(data);
                     scrollToBottom();
@@ -93,7 +94,7 @@ const ChatModal = ({ isOpen, onClose, activeItem, currentUser, isBuyer }) => {
                 sender: "seller",
             };
 
-            const res = await fetch("http://localhost:5000/api/chat/send", {
+            const res = await fetch(`${config.API_BASE_URL}/api/chat/send`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -143,8 +144,8 @@ const ChatModal = ({ isOpen, onClose, activeItem, currentUser, isBuyer }) => {
                             >
                                 <div
                                     className={`max-w-[80%] p-3 rounded-2xl text-sm ${isMe
-                                            ? 'bg-blue-600 text-white rounded-br-none'
-                                            : 'bg-white/10 text-gray-100 rounded-bl-none'
+                                        ? 'bg-blue-600 text-white rounded-br-none'
+                                        : 'bg-white/10 text-gray-100 rounded-bl-none'
                                         }`}
                                 >
                                     {msg.message}
@@ -161,8 +162,8 @@ const ChatModal = ({ isOpen, onClose, activeItem, currentUser, isBuyer }) => {
                         <button
                             onClick={toggleListening}
                             className={`p-3 rounded-xl transition-all ${isListening
-                                    ? 'bg-red-500/20 text-red-400 animate-pulse border border-red-500/50'
-                                    : 'bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10'
+                                ? 'bg-red-500/20 text-red-400 animate-pulse border border-red-500/50'
+                                : 'bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10'
                                 }`}
                             title="Dictate message"
                         >

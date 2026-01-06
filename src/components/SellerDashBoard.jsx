@@ -1,4 +1,5 @@
 import { useState } from "react";
+import config from "../config";
 import { Upload, Plus } from 'lucide-react';
 import Card from './ui/Card';
 import Input from './ui/Input';
@@ -41,7 +42,7 @@ export default function SellerDashBoard({ user }) {
     formData.append("sellerName", user?.name || "Unknown Seller");
 
     try {
-      const res = await fetch("http://localhost:5000/api/items/create", {
+      const res = await fetch(`${config.API_BASE_URL}/api/items/create`, {
         method: "POST",
         body: formData,
       });
