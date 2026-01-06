@@ -14,6 +14,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/auth", authRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/gemini", require("./routes/ai"));
 
 app.get("/", (req, res) => {
   res.send("MCKart Backend Running");

@@ -5,6 +5,7 @@ import BuyerDashboard from "./components/BuyerDashboard";
 import AuthPage from "./components/AuthPage";
 import Navbar from "./components/Navbar";
 import ChatWidget from "./components/ChatWidget";
+import AIChatWidget from "./components/AIChatWidget";
 
 export default function App() {
   const navigate = useNavigate();
@@ -72,6 +73,8 @@ export default function App() {
           setActiveChat={setActiveChat}
         />
       )}
+
+      {user && <AIChatWidget />}
 
       <Routes>
         <Route
